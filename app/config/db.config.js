@@ -3,6 +3,7 @@ module.exports = {
     USER: "postgres",
     PASSWORD: "123",
     DB: "Cadastro",
+    PORT: 5432,
     dialect: "postgres",
     pool: {
       max: 5,
@@ -11,3 +12,4 @@ module.exports = {
       idle: 10000
     }
   };
+  

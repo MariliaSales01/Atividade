@@ -1,25 +1,17 @@
 const express = require('express')
-const app = express();
-const port = 8080;
+const cors = require ("cors");
 
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+}
+
+app.use(cors(corsOptions));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-const users = [];
-
-app.get("/users",(request,response) => {
-    return response.json(users)
-});
-
-app.post("/users",(request,response) => {
-    const name = request.body.name
-    const age = request.body.age
-    const height = request.body.height
-    const brasileira = request.body.brasileira
-
-    users.push({name,age,brasileira,height })
-    return response.json({name,age,brasileira,height,brasileira,height})
-});
-
+app.use(cors(corsOptions));
 const db = require("./app/models");
 db.sequelize.sync()
 .then(() => {
@@ -29,7 +21,13 @@ db.sequelize.sync()
   console.log("Falha ao acessar o banco de dados: " + err.message);
 });
 
-require("./app/routes/items.routes")(app);
+require("./app/routes/clientes.routes")(app);
 
+app.get("/", (req,res) => {
+  res.json({message: 'Hello World!'}) 
+});
 
-app.listen(port);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server funcionando na porta ${PORT}.`);
+});
