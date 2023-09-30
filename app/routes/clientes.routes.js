@@ -1,5 +1,5 @@
 module.exports = app => {
-    const cliente = require("../controllers/cliente.controller.js");
+    const clientes = require("../controllers/cliente.controller.js");
 
     var router = require("express").Router();
   
@@ -19,17 +19,4 @@ module.exports = app => {
 
     app.use('/api/clientes', router);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+};

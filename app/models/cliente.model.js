@@ -1,7 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-const database = require("config./db.config");
 
-const Cadastro = database.define('cadastro', {
+const Cliente = sequelize.define('cliente', {
     id:{
         type: Sequelize.INTEGER,
         autoTncrement: true,
@@ -23,6 +22,6 @@ const Cadastro = database.define('cadastro', {
     idade:{
         type: Sequelize.INTEGER 
     }
-})
-return Cadastro;
-}
+});
+return Cliente;
+};

@@ -1,5 +1,5 @@
 const db = require("../models");
-const Cliente= db.cadastro;
+const Cliente= db.cliente;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Algum erro ocorreu ao tentar criar o cadastro."
+          err.message || "Algum erro ocorreu ao tentar criar o cliente."
       });
     });
 };
@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
     const nome = req.query.nome;
     var condition = nome ? { nome: { [Op.iLike]: `%${nome}%` } } : null;
   
-    Cadastro.findAll({ where: condition })
+    Cliente.findAll({ where: condition })
       .then(data => {
         res.send(data);
       })
@@ -49,7 +49,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Cadastro.findByPk(id)
+    Cliente.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -69,13 +69,13 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Cadastro.update(req.body, {
+    Cliente.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "O Cadastro foi atualizado."
+            message: "O Cliente foi atualizado."
           });
         } else {
           res.send({
@@ -93,13 +93,13 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Cadastro.destroy({
+    Cliente.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "O Cadastro foi apagado com sucesso."
+            message: "O Cliente foi apagado com sucesso."
           });
         } else {
           res.send({
@@ -115,7 +115,7 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-   Cadastro.destroy({
+   Cliente.destroy({
         where: {},
         truncate: false
       })
@@ -131,14 +131,14 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.findAllFlammables = (req, res) => {
-   Cadastro.findAll({ where: { isFlammable: true } })
+   Cliente.findAll({ where: { isFlammable: true } })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Algum erro ocorreu ao tentar pesquisar todos os cadastros."
+          err.message || "Algum erro ocorreu ao tentar pesquisar todos os Clientes."
       });
     });
 };
